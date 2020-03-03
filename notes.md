@@ -1,4 +1,6 @@
-## What is a Blockchain?
+# Notes
+
+## What is a Blockchain
 
 We can use an analogy to understand how a blockchain works. Let's consider a bank.
 Suppose that Alice wants to send money to Bob via a wire transfer. All of Alice's
@@ -37,7 +39,7 @@ It is important to note that *Blockchain* and *Cryptocurrency* are not the same 
 a cryptocurrency, but Blockchain is the underlying technology behind Bitcoin. Apart from Cryptos,
 Blockchains can be used in various other scenarios.
 
-## How does a Blockchain work?
+## How does a Blockchain work
 
 Suppose Alice wants to send some Bitcoin to Bob. In order to do this, both of them need an
 account on the Bitcoin blockchain. Their accounts are much like their usernames. Alice must
@@ -65,7 +67,7 @@ that each node verifies that they have the same valid data as everyone else. Thi
 Effectively, each node says that 'Yes' I have a valid copy of the transaction. If all nodes respond 'Yes', then the
 transaction is complete finally the crypto gets transferred from Alice's wallet to Bob's.
 
-## Why do we need Blockchain?
+## Why do we need Blockchain
 
 Continuing with the banking example, some reasons that Alice might choose Blockchain over a conventional Banking
 solution are;
@@ -83,7 +85,7 @@ transaction history.
 6. **Anti Fraud**: Blockchain transactions are publicly verifiable and it is very hard to fake transactions or
 embezzle funds.
 
-## How to become a blockchain developer?
+## How to become a blockchain developer
 
 Up until now, we have been discussing about how to send money using Blockchain. But it is also possible to build
 applications using Blockchain. Unfortunately, Bitcoin is pretty limited in this, so we use a different blockchain
@@ -91,7 +93,7 @@ called **Ethereum** for development purposes. In addition to sending cryptocurre
 **Decentralised applications** or **DApps** which run on the blockchain. Ethereum achieves this using **Smart Contracts**
 which are programs that run on the blockchain.
 
-## How a Web Application works?
+## How a Web Application works
 
 Normally, when we use a web application, we use a Web browser to load a web page which talks to a central web server over
 a network. All the code for this app lives inside the central server and all of the data is housed inside a central
@@ -99,7 +101,7 @@ database. Anytime we transact with this application, we must transact directly w
 to several problems. The application creators can change the code on the server or the data on the server anytime because
 they have full control. We can eliminate this using the blockchain.
 
-## How a Blockchain App works?
+## How a Blockchain App works
 
 We can use a browser to load a webpage and that talks directly to the blockchain instead of a backend server and database. We
 can store all of our application code and data on the blockchain instead of the central server. This is a transparent and
@@ -113,7 +115,7 @@ of reading and writing the data to and from the blockchain and executing an busi
 a lot like micro-services on the web. They are called so because they represent an unchangeable digital agreement.
 All of the data on the application will be stored as transaction records inside the blocks on the blockchain.
 
-### Dependencies for dAPP development:
+### Dependencies for dAPP development
 
 1. **nodeJS**
 2. **Ganache**: It offers a personal blockchain, which is like a real blockchain network but it runs on a computer, and hence is a
@@ -124,6 +126,7 @@ to the blockchain.
 the blockchain with our personal account, and interact with smart contracts.
 
 ### Project Setup
+
 Use `trufle init` in the command line or run `git clone https://github.com/dappuniversity/starter_kit project-name`
 to use a pre-made template.
 
@@ -135,13 +138,15 @@ the same directory easily.
 We can download all dependencies using `npm` with the command `npm install` while in the project directory.
 
 ### Development server
+
 We can run the development server with: `npm run start` in the terminal. This also opens a web browser tab with the
 React frontend template.
 
 ### Smart Contract Development Basics
+
 Create a new file titled `SocialNetwork.sol` in the `social_network/src/contracts` directory.
 
-```
+```solidity
 pragma solidity ^0.5.0; // Version of Solidity - 0.5.0 or greater
 
 contract SocialNetwork {
@@ -161,7 +166,7 @@ Then in the `social_network/migrations` directory, we create a new file titled
 `2_deploy_contracts.js` which helps in migrating the contracts to the development blockchain.
 The contents of the file are:
 
-```
+```javascript
 const SocialNetwork = artifacts.require("SocialNetwork");
 
 module.exports = function(deployer) {
@@ -181,7 +186,7 @@ We fetch the Smart Contract we deployed; type the Contract Name followed by `.de
 
 Because these requests are asynchronous, we can't assign the result to a variable, so we use the following:
 
-```
+```shell
 contract = await SocialNetwork.deployed()
 contract.address // To fetch the unique address of the contract - where it is located on the chain
 name = await contract.name() // Another async call
@@ -195,7 +200,7 @@ test assertions. Both of these libraries are part of the **Truffle Suite**.
 
 Inside the file;
 
-```
+```javascript
 const SocialNetwork = artifacts.require('./SocialNetwork.sol')
 
 require('chai')
