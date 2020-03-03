@@ -193,6 +193,8 @@ name = await contract.name() // Another async call
 name // Print the name
 ```
 
+#### Smart Contract Tests
+
 To run **tests** on Smart Contracts to automate debugging, we create another file in a new directory
 `social_network/test` and create the test suite file called `social_network/test/SocialNetwork.js`. We can
 use the **Mocha** test framework to write testing frameworks and the **Chai Assertion Library** to write
@@ -210,14 +212,22 @@ require('chai')
 contract('SocialNetwork', (accounts) => {
   let socialNetwork // Variable to represent deployed Smart Contract
 
+  before(async () => {
+    socialNetwork = await SocialNetwork.deployed()
+  })
+
   describe('deployement', async () => {
     it('deploys successfully', async () => {
-      socialNetwork = await SocialNetwork.deployed()
       const address = await socialNetwork.address
       assert.notEqual(address, 0x0)
       assert.notEqual(address, '')
       assert.notEqual(address, null)
       assert.notEqual(address, undefined)
+    })
+
+    it('has a name', async () => {
+      const name = await socialNetwork.name()
+      assert.equal(name, 'skhiearth')
     })
   })
 })
