@@ -97,6 +97,8 @@ database. Anytime we transact with this application, we must transact directly w
 to several problems. The application creators can change the code on the server or the data on the server anytime because
 they have full control. We can eliminate this using the blockchain.
 
+![Web App](Image Assets/howWebAppWorks.png)
+
 ## How a Blockchain App works?
 
 We can use a browser to load a webpage and that talks directly to the blockchain instead of a backend server and database. We
@@ -105,7 +107,10 @@ trust-worthy way of knowing that the application code and data won't change. All
 be made up of Smart Contracts. These are the building blocks of a blockchain application. All of code of the Smart Contract is
 unchangeable. Once the code is sent on the blockchain, no one can update or tamper with it and we know that it'll work the
 same way every single time.
-Smart Contracts are written in a programming language called **Solidity**, which looks a lot like *JavaScript*. They are incharge
+
+![Blockchain App](Image Assets/howBlockchainAppWorks.png)
+
+Smart Contracts are written in a programming language called **Solidity**, which looks a lot like *JavaScript*. They are in-charge
 of reading and writing the data to and from the blockchain and executing an business logic that we write. Smart Contracts work
 a lot like micro-services on the web. They are called so because they represent an unchangeable digital agreement.
 All of the data on the application will be stored as transaction records inside the blocks on the blockchain.
