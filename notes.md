@@ -97,8 +97,6 @@ database. Anytime we transact with this application, we must transact directly w
 to several problems. The application creators can change the code on the server or the data on the server anytime because
 they have full control. We can eliminate this using the blockchain.
 
-![Web App](Image Assets/howWebAppWorks.png)
-
 ## How a Blockchain App works?
 
 We can use a browser to load a webpage and that talks directly to the blockchain instead of a backend server and database. We
@@ -107,8 +105,6 @@ trust-worthy way of knowing that the application code and data won't change. All
 be made up of Smart Contracts. These are the building blocks of a blockchain application. All of code of the Smart Contract is
 unchangeable. Once the code is sent on the blockchain, no one can update or tamper with it and we know that it'll work the
 same way every single time.
-
-![Blockchain App](Image Assets/howBlockchainAppWorks.png)
 
 Smart Contracts are written in a programming language called **Solidity**, which looks a lot like *JavaScript*. They are in-charge
 of reading and writing the data to and from the blockchain and executing an business logic that we write. Smart Contracts work
@@ -123,3 +119,19 @@ to the blockchain.
 3. **Truffle Framework**: Used to develop Ethereum Smart Contracts with Solidity.
 4. **Metamask**: A Chromium based extension; used to connect to the blockchain network. Metamask allows us to connect to
 the blockchain with our personal account, and interact with smart contracts.
+
+### Project Setup
+Use `trufle init` in the command line or run `git clone https://github.com/dappuniversity/starter_kit project-name`
+to use a pre-made template.
+
+In the project directory, the `truffle-config.js` file is used to configure the truffle project like tell it the blockchain we
+want to connect to. Unlike the `trufle init` command, the template expects the contracts and their ABIs in a folder called
+`social-network/src/contracts`. These contracts placed in the folder can be exposed to the client-side application made in
+the same directory easily.
+
+We can download all dependencies using `npm` with the command `npm install` while in the project directory.
+
+
+### Development server
+We can run the development server with: `npm run start` in the terminal. This also opens a web browser tab with the
+React frontend template.
