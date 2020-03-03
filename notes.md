@@ -131,7 +131,55 @@ the same directory easily.
 
 We can download all dependencies using `npm` with the command `npm install` while in the project directory.
 
-
 ### Development server
 We can run the development server with: `npm run start` in the terminal. This also opens a web browser tab with the
 React frontend template.
+
+### Smart Contract Development Basics
+Create a new file titled `SocialNetwork.sol` in the `social_network/src/contracts` directory.
+
+```
+pragma solidity ^0.5.0; // Version of Solidity - 0.5.0 or greater
+
+contract SocialNetwork {
+  string public name;
+
+  constructor() public {
+    name = "skhiearth";
+  }
+}
+```
+
+We can compile all Smart Contracts using `truffle compile` in the Terminal.
+Compiling also produces the `ABI` for all the contracts in the `social_network/src/abis`
+directory, which are essentially JSON representations of the contracts.
+
+Then in the `social_network/migrations` directory, we create a new file titled
+`2_deploy_contracts.js` which helps in migrating the contracts to the development blockchain.
+The contents of the file are:
+
+```
+const SocialNetwork = artifacts.require("SocialNetwork");
+
+module.exports = function(deployer) {
+  deployer.deploy(SocialNetwork);
+};
+```
+
+We run this migration file using `truffle migrate` in the shell.
+
+We can try to interact with the contracts in the console (for development and debugging purposes):
+Firstly, run `truffle console` in the Terminal. In this console, we have access to a
+JavaScript runtime environment where we can interact with smart contracts deployed to our network.
+Essentially, we can write jS inside the console.
+
+We fetch the Smart Contract we deployed; type the Contract Name followed by `.deployed()` in the console:
+`SocialNetwork.deployed()` and press Return.
+
+Because these requests are asynchronous, we can't assign the result to a variable, so we use the following:
+```
+contract = await SocialNetwork.deployed()
+contract.address // To fetch the unique address of the contract - where it is located on the chain
+name = await contract.name() // Another async call
+name // Print the name 
+```
