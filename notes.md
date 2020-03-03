@@ -6,6 +6,7 @@ money is stored inside a bank account, which has two primary purposes. It keeps
 track of how much money she has and it provides an online portal that allows her to
 perform the transfer to Bob. Behind the scenes, the bank has two primary technical
 features that make this possible:
+
 1. Database: The bank maintains a database ledger of all of Alice's transaction to
 determine her account balance and transaction history.
 2. Network: The bank uses a network to process wire transfers so that funds can be
@@ -68,6 +69,7 @@ transaction is complete finally the crypto gets transferred from Alice's wallet 
 
 Continuing with the banking example, some reasons that Alice might choose Blockchain over a conventional Banking
 solution are;
+
 1. One reason is **Transaction speed**. While international wire transfer can take days, Alice can send Bitcoin
 almost instantly.
 2. Another reason is **Transaction fees**. In case of huge payments to merchants, wire transfer incurs a large
@@ -112,6 +114,7 @@ a lot like micro-services on the web. They are called so because they represent 
 All of the data on the application will be stored as transaction records inside the blocks on the blockchain.
 
 ### Dependencies for dAPP development:
+
 1. **nodeJS**
 2. **Ganache**: It offers a personal blockchain, which is like a real blockchain network but it runs on a computer, and hence is a
 closed network. We can use this to develop Smart Contracts, run tests against the network, develop applications that talk
@@ -177,9 +180,42 @@ We fetch the Smart Contract we deployed; type the Contract Name followed by `.de
 `SocialNetwork.deployed()` and press Return.
 
 Because these requests are asynchronous, we can't assign the result to a variable, so we use the following:
+
 ```
 contract = await SocialNetwork.deployed()
 contract.address // To fetch the unique address of the contract - where it is located on the chain
 name = await contract.name() // Another async call
-name // Print the name 
+name // Print the name
 ```
+
+To run **tests** on Smart Contracts to automate debugging, we create another file in a new directory
+`social_network/test` and create the test suite file called `social_network/test/SocialNetwork.js`. We can
+use the **Mocha** test framework to write testing frameworks and the **Chai Assertion Library** to write
+test assertions. Both of these libraries are part of the **Truffle Suite**.
+
+Inside the file;
+
+```
+const SocialNetwork = artifacts.require('./SocialNetwork.sol')
+
+require('chai')
+  .use(require('chai-as-promised'))
+  .should()
+
+contract('SocialNetwork', (accounts) => {
+  let socialNetwork // Variable to represent deployed Smart Contract
+
+  describe('deployement', async () => {
+    it('deploys successfully', async () => {
+      socialNetwork = await SocialNetwork.deployed()
+      const address = await socialNetwork.address
+      assert.notEqual(address, 0x0)
+      assert.notEqual(address, '')
+      assert.notEqual(address, null)
+      assert.notEqual(address, undefined)
+    })
+  })
+})
+```
+
+To run tests, `truffle tests` in the terminal.
