@@ -234,3 +234,14 @@ contract('SocialNetwork', (accounts) => {
 ```
 
 To run tests, `truffle tests` in the terminal.
+
+### Gas
+
+Anytime we write new information to the blockchain itself, we have to pay a **gas fee**.
+Like anytime we send a cryptocurrency from one account to another, we have to pay a
+transaction fee to do this. Likewise, calling a function that updates the chain or
+creating a Smart Contract, we also pay the gas.
+In Solidity, there are two types of functions: *read* and *write*. Read functions are
+free but write functions cost gas because they actually change the blockchain.
+**Gas** is basically a transaction fee paid in Ether, Ethereum's native cryptocurrency, and
+one must have Ether in order to create transactions on the Ethereum network.
