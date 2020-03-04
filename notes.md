@@ -343,8 +343,20 @@ class App extends Component {
     const networkData = SocialNetwork.networks[networkId]
     if(networkData) {
       const socialNetwork = web3.eth.Contract(SocialNetwork.abi, networkData.address)
+      this.setState({socialNetwork})
+      const postCount = await socialNetwork.methods.postCount().call()
+      this.setState({postCount})
     } else {
       window.alert('SocialNetwork contract not deployed to detected network.')
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      account: '',
+      socialNetwork: null,
+      postCount: 0
     }
   }
 
