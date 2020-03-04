@@ -245,3 +245,84 @@ In Solidity, there are two types of functions: *read* and *write*. Read function
 free but write functions cost gas because they actually change the blockchain.
 **Gas** is basically a transaction fee paid in Ether, Ethereum's native cryptocurrency, and
 one must have Ether in order to create transactions on the Ethereum network.
+
+### Deploying Smart Contract
+
+`truffle migrate --reset`
+
+The `reset` flag puts a new copy of the contract on the blockchain.
+
+### Front-end for dAPP using React
+
+With smart contracts migrated, we can start building the front-end for the decentralized application.
+The main JavaScript file for the front-end application is present in the `social_network/src/components`
+directory and is called `App.js`.
+React is a component-based library that allows us to write JavaScript in form of reusable components. It
+mixed JavaScript with HTML. Concisely, everything inside the `return` block in React is the HTML that is
+rendered on to the page from the `render()` method.
+
+To connect the web application to the blockchain, we use the `web3.js` library and `Metamask` helps in converting
+the web browser to a Blockchain browser.
+We import the library as;
+
+```JavaScript
+import Web3 from 'web3';
+```
+
+Once imported, we can just load our connection to the blockchain inside of a special function;
+
+```JavaScript
+class App extends Component {
+
+  async loadWeb3() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+        window.web3 = new Web3(window.web3.currentProvider);
+    } else {
+        window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+  }
+
+}
+```
+
+After defining the function, we want to call it whenever the React `Component` is loaded. React has some
+special functions for this;
+
+```JavaScript
+class App extends Component {
+
+  async componentWillMount() {
+    await this.loadWeb3()
+  }
+
+}
+```
+
+To load data from the blockchain, like account;
+
+```JavaScript
+class App extends Component {
+
+  async componentWillMount() {
+    await this.loadWeb3()
+    await this.loadBlockchainData()
+  }
+
+  async loadBlockchainData() {
+    const web3 = window.web3;
+    const accounts = await web3.eth.getAccounts()
+    this.setState({account: accounts[0]})
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      account: ''
+    }
+  }
+
+}
+```
