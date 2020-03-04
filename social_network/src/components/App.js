@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.png';
 import Web3 from 'web3'
 import './App.css';
+import SocialNetwork from '../abis/SocialNetwork.json'
 import Navbar from './Navbar';
 
 class App extends Component {
@@ -26,6 +27,14 @@ class App extends Component {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts()
     this.setState({account: accounts[0]})
+
+    const networkId = await web3.eth.net.getId()
+    const networkData = SocialNetwork.networks[networkId]
+    if(networkData) {
+      const socialNetwork = web3.eth.Contract(SocialNetwork.abi, networkData.address)
+    } else {
+      window.alert('SocialNetwork contract not deployed to detected network.')
+    }
   }
 
   constructor(props) {

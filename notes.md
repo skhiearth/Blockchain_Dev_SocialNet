@@ -326,3 +326,29 @@ class App extends Component {
 
 }
 ```
+
+To add smart contracts to the app;
+
+```JavaScript
+import SocialNetwork from 'social_network/src/abis/SocialNetwork.json'
+
+class App extends Component {
+
+  async loadBlockchainData() {
+    const web3 = window.web3;
+    const accounts = await web3.eth.getAccounts()
+    this.setState({account: accounts[0]})
+
+    const networkId = await web3.eth.net.getId()
+    const networkData = SocialNetwork.networks[networkId]
+    if(networkData) {
+      const socialNetwork = web3.eth.Contract(SocialNetwork.abi, networkData.address)
+    } else {
+      window.alert('SocialNetwork contract not deployed to detected network.')
+    }
+  }
+
+}
+```
+
+We can use this to interact with the Smart Contracts, and do stuff like calling Solidity functions, etc.
